@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     Boolean timerActive = false;
     Button start;
     long timeleft;
+    MediaPlayer mediaPlayer;
     CountDownTimer countDownTimer = null;
 
     public void updateTimer(int timeLeft) {
@@ -74,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onFinish() {
 
                     timer.setText("0:00:00");
-                    MediaPlayer mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.alarm);
+                    mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.alarm);
                     mediaPlayer.start();
 
                 }
@@ -86,7 +87,15 @@ public class MainActivity extends AppCompatActivity {
             seekbar.setEnabled(true);
             start.setText("GO !");
             timer.setText("0:25:00");
+            seekbar.setProgress(1500);
             countDownTimer.cancel();
+            if ( mediaPlayer != null ) {
+
+                mediaPlayer.stop();
+                mediaPlayer.release();
+
+            }
+
         }
     };
 
